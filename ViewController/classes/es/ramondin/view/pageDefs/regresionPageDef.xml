@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.1.64.93" id="regresionPageDef" Package="es.ramondin.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PobladaProg" RangeSize="-1" DataControl="RegresionesAMDataControl" id="PobladaProgIterator"/>
+  </executables>
+  <bindings>
+    <graph IterBinding="PobladaProgIterator" id="PobladaProg" xmlns="http://xmlns.oracle.com/adfm/dvt" type="COMBINATION_VERT_ABS">
+      <graphDataMap leafOnly="true">
+        <series>
+          <data>
+            <item value="Frecuencias"/>
+            <item value="Regresion"/>
+          </data>
+        </series>
+        <groups>
+          <item value="Desviaciones"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <methodAction id="getFuncionY" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getFuncionY" IsViewObjectMethod="true"
+                  DataControl="RegresionesAMDataControl" InstanceName="RegresionesAMDataControl.PobladaProg"
+                  ReturnName="data.RegresionesAMDataControl.methodResults.getFuncionY_RegresionesAMDataControl_PobladaProg_getFuncionY_result"/>
+    <methodAction IterBinding="PobladaProgIterator" id="getValorYParaKP" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getValorYParaKP"
+                  IsViewObjectMethod="true" DataControl="RegresionesAMDataControl" InstanceName="RegresionesAMDataControl.PobladaProg"
+                  ReturnName="data.RegresionesAMDataControl.methodResults.getValorYParaKP_RegresionesAMDataControl_PobladaProg_getValorYParaKP_result">
+      <NamedData NDName="valorK" NDValue="#{backingBeanScope.PruebasBacking.valorK}" NDType="java.lang.String"/>
+      <NamedData NDName="valorP" NDValue="#{backingBeanScope.PruebasBacking.valorP}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="PobladaProgIterator" id="getValorXParaY" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getValorXParaY"
+                  IsViewObjectMethod="true" DataControl="RegresionesAMDataControl" InstanceName="RegresionesAMDataControl.PobladaProg"
+                  ReturnName="data.RegresionesAMDataControl.methodResults.getValorXParaY_RegresionesAMDataControl_PobladaProg_getValorXParaY_result">
+      <NamedData NDName="valorY" NDValue="#{backingBeanScope.PruebasBacking.valorY}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="PobladaProgIterator" id="obtenerRegresion" RequiresUpdateModel="true" Action="invokeMethod" MethodName="obtenerRegresion"
+                  IsViewObjectMethod="true" DataControl="RegresionesAMDataControl" InstanceName="RegresionesAMDataControl.PobladaProg">
+      <NamedData NDName="valoresX" NDValue="#{backingBeanScope.PruebasBacking.valoresX}" NDType="java.lang.String"/>
+      <NamedData NDName="valoresY" NDValue="#{backingBeanScope.PruebasBacking.valoresY}" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="PobladaProgIterator" id="getValorYParaX" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getValorYParaX"
+                  IsViewObjectMethod="true" DataControl="RegresionesAMDataControl" InstanceName="RegresionesAMDataControl.PobladaProg"
+                  ReturnName="data.RegresionesAMDataControl.methodResults.getValorYParaX_RegresionesAMDataControl_PobladaProg_getValorYParaX_result">
+      <NamedData NDName="valorX" NDValue="#{backingBeanScope.PruebasBacking.valorX}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

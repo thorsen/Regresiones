@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1" title="Cálculo de regresiones">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelSplitter id="ps1" splitterPosition="300" orientation="vertical">
+          <f:facet name="first">
+            <af:panelGroupLayout layout="vertical" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl0">
+              <af:panelGroupLayout layout="vertical" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl1">
+                <af:inputText label="Valores x (separados por ;) =" id="it3" value="#{backingBeanScope.PruebasBacking.valoresX}" columns="75"/>
+                <af:inputText label="Valores y (separados por ;) =" id="it4" value="#{backingBeanScope.PruebasBacking.valoresY}" columns="75"/>
+                <af:commandButton text="Obtener Regresión" disabled="#{!bindings.obtenerRegresion.enabled}" id="cb1" partialSubmit="true"
+                                  actionListener="#{backingBeanScope.PruebasBacking.calcularRegresion}"/>
+                <af:panelLabelAndMessage label="y =" id="plam1" labelStyle="font-weight:bold;" inlineStyle="font-weight:bold;">
+                  <af:outputText id="ot1" value="#{backingBeanScope.PruebasBacking.funcionY}" partialTriggers="cb1"/>
+                </af:panelLabelAndMessage>
+                <af:spacer width="10" height="25" id="s3"/>
+              </af:panelGroupLayout>
+              <af:panelGroupLayout layout="horizontal" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl2" valign="top">
+                <af:panelGroupLayout layout="vertical" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl2_1">
+                  <af:inputText label="k =" id="it1" value="#{backingBeanScope.PruebasBacking.valorK}"/>
+                  <af:inputText label="p =" id="it2" value="#{backingBeanScope.PruebasBacking.valorP}"/>
+                  <af:commandButton text="Calcular valor de Y para K, P" id="cb2" partialSubmit="true"
+                                    actionListener="#{backingBeanScope.PruebasBacking.obtenerValorYParaKP}"/>
+                  <af:panelLabelAndMessage label="y =" id="plam2" labelStyle="font-weight:bold;" inlineStyle="font-weight:bold;">
+                    <af:outputText id="ot2" value="#{backingBeanScope.PruebasBacking.valorYCalculadoKP}" partialTriggers="cb2"/>
+                  </af:panelLabelAndMessage>
+                </af:panelGroupLayout>
+                <af:spacer width="50" height="10" id="s1"/>
+                <af:panelGroupLayout layout="vertical" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl2_2">
+                  <af:inputText label="y =" id="it5" value="#{backingBeanScope.PruebasBacking.valorY}"/>
+                  <af:commandButton text="Calcular valor de X para Y" id="cb3" partialSubmit="true"
+                                    actionListener="#{backingBeanScope.PruebasBacking.obtenerValorX}"/>
+                  <af:panelLabelAndMessage label="x =" id="plam3" labelStyle="font-weight:bold;" inlineStyle="font-weight:bold;">
+                    <af:outputText id="ot3" value="#{backingBeanScope.PruebasBacking.valorXCalculado}" partialTriggers="cb3"/>
+                  </af:panelLabelAndMessage>
+                </af:panelGroupLayout>
+                <af:spacer width="50" height="10" id="s2"/>
+                <af:panelGroupLayout layout="vertical" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="pgl2_3">
+                  <af:inputText label="x =" id="it6" value="#{backingBeanScope.PruebasBacking.valorX}"/>
+                  <af:commandButton text="Calcular valor de Y para X" id="cb4" partialSubmit="true"
+                                    actionListener="#{backingBeanScope.PruebasBacking.obtenerValorYParaX}"/>
+                  <af:panelLabelAndMessage label="y =" id="plam4" labelStyle="font-weight:bold;" inlineStyle="font-weight:bold;">
+                    <af:outputText id="ot4" value="#{backingBeanScope.PruebasBacking.valorYCalculadoX}" partialTriggers="cb4"/>
+                  </af:panelLabelAndMessage>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="second">
+            <dvt:comboGraph shortDesc="Prueba tendencia" id="comboGraph2" value="#{bindings.PobladaProg.graphModel}" subType="COMBINATION_VERT_ABS"
+                            dynamicResize="DYNAMIC_SIZE" partialTriggers="::cb1" binding="#{backingBeanScope.PruebasBacking.comboGraph1}">
+              <dvt:background>
+                <dvt:specialEffects/>
+              </dvt:background>
+              <dvt:graphPlotArea/>
+              <dvt:seriesSet markerDisplayed="false">
+                <dvt:series index="1" markerShape="MS_NONE" markerType="MT_CURVE_LINE"/>
+                <!--<dvt:series index="0" fitlineType="FT_EXPONENTIAL"/>-->
+              </dvt:seriesSet>
+              <dvt:o1Axis/>
+              <dvt:y1Axis/>
+              <dvt:legendArea automaticPlacement="AP_NEVER"/>
+            </dvt:comboGraph>
+          </f:facet>
+        </af:panelSplitter>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>
